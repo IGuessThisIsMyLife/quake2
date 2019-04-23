@@ -47,6 +47,7 @@ field_t fields[] = {
 	{"style", FOFS(style), F_INT},
 	{"count", FOFS(count), F_INT},
 	{"health", FOFS(health), F_INT},
+	{"money", FOFS(money), F_INT},
 	{"sounds", FOFS(sounds), F_INT},
 	{"light", 0, F_IGNORE},
 	{"dmg", FOFS(dmg), F_INT},

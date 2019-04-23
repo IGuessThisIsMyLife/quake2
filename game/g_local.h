@@ -840,6 +840,7 @@ typedef struct
 	int			health;
 	int			max_health;
 	int			savedFlags;
+	int			money;
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];
@@ -1054,6 +1055,7 @@ struct edict_s
 	int			health;
 	int			max_health;
 	int			gib_health;
+	int			money;
 	int			deadflag;
 	qboolean	show_hostile;
 
