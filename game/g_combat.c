@@ -118,6 +118,8 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 
 	if ((targ->svflags & SVF_MONSTER) && (targ->deadflag != DEAD_DEAD))
 	{
+		attacker->client->pers.money += 100;
+		gi.cprintf(attacker, PRINT_HIGH, "You made %d\n", attacker->client->pers.money);
 		targ->touch = NULL;
 		monster_death_use (targ);
 	}
