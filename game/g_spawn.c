@@ -698,14 +698,15 @@ char *single_statusbar =
 
 //was
 // money
+/*
 "if 18 "			
 "	yb	-730 "		
 "	xr	-995 "		
-"	num	3	19 "	
+"	num	5	19 "	
 "	xr	-1020 "		
 "	pic	18 "		
 "endif "
-
+*/
 //  help / weapon icon 
 "if 11 "
 "	xv	148 "

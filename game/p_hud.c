@@ -389,8 +389,8 @@ void G_SetStats (edict_t *ent)
 	//
 	// money
 	//
-	ent->client->ps.stats[STAT_MONEY_ICON] = gi.imageindex ("p_invulnerability");
-	ent->client->ps.stats[STAT_MONEY] = ent->money;
+	//ent->client->ps.stats[STAT_MONEY_ICON] = gi.imageindex ("p_invulnerability");
+	//ent->client->ps.stats[STAT_MONEY] = ent->money;
 
 	//
 	// ammo
