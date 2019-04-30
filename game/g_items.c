@@ -139,16 +139,20 @@ void DoRespawn (edict_t *ent)
 	ent->solid = SOLID_TRIGGER;
 	gi.linkentity (ent);
 
+	if (strcmp(ent->classname, "monster_soldier") == 0 ||
+		strcmp(ent->classname, "monster_soldier_light") == 0 ||
+		strcmp(ent->classname, "monster_soldier_ss") == 0)
+	{
+		ED_CallSpawn(ent);
+		return;
+	}
+
 	// send an effect
 	ent->s.event = EV_ITEM_RESPAWN;
 }
 
 void SetRespawn (edict_t *ent, float delay)
 {
-	if (strcmp(ent->classname, "monster_soldier") == 0){
-		ED_CallSpawn(ent);
-		return;
-	}
 	ent->flags |= FL_RESPAWN;
 	ent->svflags |= SVF_NOCLIENT;
 	ent->solid = SOLID_NOT;
