@@ -145,6 +145,10 @@ void DoRespawn (edict_t *ent)
 
 void SetRespawn (edict_t *ent, float delay)
 {
+	if (strcmp(ent->classname, "monster_soldier") == 0){
+		ED_CallSpawn(ent);
+		return;
+	}
 	ent->flags |= FL_RESPAWN;
 	ent->svflags |= SVF_NOCLIENT;
 	ent->solid = SOLID_NOT;
