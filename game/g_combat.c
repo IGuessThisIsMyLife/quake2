@@ -120,7 +120,7 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 	{
 		attacker->client->pers.money += 100;
 		gi.cprintf(attacker, PRINT_HIGH, "You made $%d! Your total is now %d.\n", 100, attacker->client->pers.money);
-		//Add_Ammo(attacker, AMMO_SHELLS, 4);
+		
 		targ->touch = NULL;
 		monster_death_use (targ);
 	}
