@@ -158,7 +158,7 @@ void SetRespawn (edict_t *ent, float delay)
 	ent->solid = SOLID_NOT;
 	ent->nextthink = level.time + delay;
 	ent->think = DoRespawn;
-	gi.linkentity (ent);
+	gi.linkentity(ent);
 }
 
 

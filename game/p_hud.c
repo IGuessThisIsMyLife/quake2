@@ -307,6 +307,7 @@ void HelpComputer (edict_t *ent)
 	char *menu = "Buy Menu: ";
 	char *curr = ent->client->pers.weapon->pickup_name;
 	int money = ent->client->pers.money;
+	int waves;
 
 	char *up1 = "Upgrade 1: +Damage";
 	char *up2 = "Upgrade 2: +Fire Rate";
@@ -316,6 +317,11 @@ void HelpComputer (edict_t *ent)
 	char *wep2 = "Shotgun has 0/3 upgrades.";
 	char *wep3 = "Machinegun has 0/3 upgrades.";
 
+	if (level.killed_monsters == 17)
+	{
+		waves++;
+		gi.cprintf(ent, PRINT_HIGH, "Wave %d completed! Starting wave %d!\n", waves - 1, waves);
+	}
 
 	// send the layout
 	Com_sprintf(string, sizeof(string),
