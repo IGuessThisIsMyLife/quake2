@@ -125,6 +125,7 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 		monster_death_use (targ);
 	}
 
+	SetRespawn(targ, 50);
 	targ->die (targ, inflictor, attacker, damage, point);
 }
 
