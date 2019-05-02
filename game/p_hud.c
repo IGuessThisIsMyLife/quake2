@@ -308,6 +308,7 @@ void HelpComputer (edict_t *ent)
 	char *curr = ent->client->pers.weapon->pickup_name;
 	int money = ent->client->pers.money;
 	int waves = ent->client->pers.wave;
+	int killsNeeded = (waves * 17) - level.killed_monsters;
 	
 	char *up1 = "Upgrade 1: +Damage";
 	char *up2 = "Upgrade 2: +Fire Rate";
@@ -328,15 +329,15 @@ void HelpComputer (edict_t *ent)
 		"xv 0 yv 110 cstring2 \"%s\" "		// weapon 1
 		"xv 0 yv 118 cstring2 \"%s\" "		// weapon 2
 		"xv 0 yv 126 cstring2 \"%s\" "		// weapon 3
-		"xv 50 yv 164 string2 \" Kills    To->Wave    Secrets\" "
-		"xv 50 yv 172 string2 \" %3i        %d        %i/%i\" ",
+		"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
+		"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
 		money,
 		menu, curr,
 		up1, up2, up3,
 		wep1, wep2, wep3,
 		level.killed_monsters,
 		waves,
-		level.found_secrets, level.total_secrets);
+		killsNeeded);
 
 	gi.WriteByte(svc_layout);
 	gi.WriteString(string);
