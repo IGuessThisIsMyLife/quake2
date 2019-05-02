@@ -139,9 +139,7 @@ void DoRespawn (edict_t *ent)
 	ent->solid = SOLID_TRIGGER;
 	gi.linkentity (ent);
 
-	if (strcmp(ent->classname, "monster_soldier") == 0 ||
-		strcmp(ent->classname, "monster_soldier_light") == 0 ||
-		strcmp(ent->classname, "monster_soldier_ss") == 0)
+	if (ent->svflags & SVF_MONSTER)
 	{
 		ED_CallSpawn(ent);
 		return;

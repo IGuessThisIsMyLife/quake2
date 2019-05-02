@@ -307,8 +307,8 @@ void HelpComputer (edict_t *ent)
 	char *menu = "Buy Menu: ";
 	char *curr = ent->client->pers.weapon->pickup_name;
 	int money = ent->client->pers.money;
-	int waves;
-
+	int waves = ent->client->pers.wave;
+	
 	char *up1 = "Upgrade 1: +Damage";
 	char *up2 = "Upgrade 2: +Fire Rate";
 	char *up3 = "Upgrade 3: +# Projectiles";
@@ -316,12 +316,6 @@ void HelpComputer (edict_t *ent)
 	char *wep1 = "Blaster has 0/3 upgrades.";
 	char *wep2 = "Shotgun has 0/3 upgrades.";
 	char *wep3 = "Machinegun has 0/3 upgrades.";
-
-	if (level.killed_monsters == 17)
-	{
-		waves++;
-		gi.cprintf(ent, PRINT_HIGH, "Wave %d completed! Starting wave %d!\n", waves - 1, waves);
-	}
 
 	// send the layout
 	Com_sprintf(string, sizeof(string),
@@ -334,14 +328,14 @@ void HelpComputer (edict_t *ent)
 		"xv 0 yv 110 cstring2 \"%s\" "		// weapon 1
 		"xv 0 yv 118 cstring2 \"%s\" "		// weapon 2
 		"xv 0 yv 126 cstring2 \"%s\" "		// weapon 3
-		"xv 50 yv 164 string2 \" Kills     Wave     Secrets\" "
-		"xv 50 yv 172 string2 \" %3i        %i        %i/%i\" ",
+		"xv 50 yv 164 string2 \" Kills    To->Wave    Secrets\" "
+		"xv 50 yv 172 string2 \" %3i        %d        %i/%i\" ",
 		money,
 		menu, curr,
 		up1, up2, up3,
 		wep1, wep2, wep3,
 		level.killed_monsters,
-		level.found_goals,
+		waves,
 		level.found_secrets, level.total_secrets);
 
 	gi.WriteByte(svc_layout);
@@ -489,6 +483,11 @@ void G_SetStats (edict_t *ent)
 	//
 	ent->client->ps.stats[STAT_MONEY_ICON] = gi.imageindex ("p_invulnerability");
 	ent->client->ps.stats[STAT_MONEY] = ent->money;
+
+	//
+	// wave
+	//
+	ent->client->ps.stats[STAT_WAVE] = ent->wave;
 
 	//
 	// ammo

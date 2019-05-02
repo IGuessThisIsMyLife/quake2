@@ -124,7 +124,16 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 		monster_death_use (targ);
 	}
 	targ->die (targ, inflictor, attacker, damage, point);
-	SetRespawn(targ, 10);
+	if (targ->svflags & SVF_MONSTER){
+		SetRespawn(targ, 10);
+		if (level.killed_monsters > 0 && level.killed_monsters % 17 == 0)
+		{
+			int waves = attacker->client->pers.wave;
+			attacker->client->pers.money += waves * 100;
+			gi.cprintf(attacker, PRINT_HIGH, "Wave %d completed and you won $%d! Starting Wave %d!\n", waves, waves * 100, waves + 1);
+			attacker->client->pers.wave += 1;
+		}
+	}
 }
 
 

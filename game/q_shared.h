@@ -1010,6 +1010,7 @@ typedef enum
 #define STAT_SPECTATOR			17
 #define STAT_MONEY_ICON			18
 #define STAT_MONEY				19
+#define STAT_WAVE				20
 
 #define	MAX_STATS				32
 
