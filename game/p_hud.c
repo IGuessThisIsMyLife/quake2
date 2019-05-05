@@ -389,19 +389,20 @@ Draw buy menu.
 void Buy_Menu(edict_t *ent)
 {
 	char	string[1024];
-	
+
 	char *menu = "Buy Menu: ";
 	char *curr = ent->client->pers.weapon->pickup_name;
 	int money = ent->client->pers.money;
+	int waves = ent->client->pers.wave;
+	int killsNeeded = (waves * 17) - level.killed_monsters;
 
 	char *up1 = "Upgrade 1: +Damage";
-	char *up2 = "Upgrade 2: +Fire Rate";
-	char *up3 = "Upgrade 3: +# Projectiles";
+	char *up2 = "Upgrade 2: -Recoil";
+	char *up3 = "Upgrade 3: ++Damage";
 
 	char *wep1 = "Blaster has 0/3 upgrades.";
 	char *wep2 = "Shotgun has 0/3 upgrades.";
 	char *wep3 = "Machinegun has 0/3 upgrades.";
-
 
 	// send the layout
 	Com_sprintf(string, sizeof(string),
@@ -411,22 +412,25 @@ void Buy_Menu(edict_t *ent)
 		"xv 53 yv 54 string2 \"%s\" "		// upgrade 1
 		"xv 53 yv 62 string2 \"%s\" "		// upgrade 2
 		"xv 53 yv 70 string2 \"%s\" "		// upgrade 3
-		"xv 0 yv 110 cstring2 \"%s\" "		// weapon 1
-		"xv 0 yv 118 cstring2 \"%s\" "		// weapon 2
-		"xv 0 yv 126 cstring2 \"%s\" "		// weapon 3
-		"xv 50 yv 164 string2 \" Kills     Wave     Secrets\" "
-		"xv 50 yv 172 string2 \" %3i        %i       %i/%i\" ",
+		"xv 0 yv 110 cstring2 \"%s\" "		// weapon 1 upgrades
+		"xv 0 yv 118 cstring2 \"%s\" "		// weapon 2 upgrades
+		"xv 0 yv 126 cstring2 \"%s\" "		// weapon 3 upgrades
+		"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
+		"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
 		money,
 		menu, curr,
 		up1, up2, up3,
 		wep1, wep2, wep3,
 		level.killed_monsters,
-		level.found_goals,
-		level.found_secrets, level.total_secrets);
+		waves,
+		killsNeeded);
 
 	gi.WriteByte(svc_layout);
 	gi.WriteString(string);
 	gi.unicast(ent, true);
+
+	//if ()
+
 }
 
 /*
