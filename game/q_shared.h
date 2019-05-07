@@ -1011,6 +1011,9 @@ typedef enum
 #define STAT_MONEY_ICON			18
 #define STAT_MONEY				19
 #define STAT_WAVE				20
+#define STAT_WEAP_1_UPGRADES	21
+#define STAT_WEAP_2_UPGRADES	22
+#define STAT_WEAP_3_UPGRADES	23
 
 #define	MAX_STATS				32
 

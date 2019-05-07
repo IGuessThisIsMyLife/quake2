@@ -309,31 +309,26 @@ void HelpComputer (edict_t *ent)
 	int money = ent->client->pers.money;
 	int waves = ent->client->pers.wave;
 	int killsNeeded = (waves * 17) - level.killed_monsters;
-	
-	char *up1 = "Upgrade 1: +Damage";
-	char *up2 = "Upgrade 2: +Fire Rate";
-	char *up3 = "Upgrade 3: +# Projectiles";
 
-	char *wep1 = "Blaster has 0/3 upgrades.";
-	char *wep2 = "Shotgun has 0/3 upgrades.";
-	char *wep3 = "Machinegun has 0/3 upgrades.";
+	int wep1 = ent->client->pers.weap1_ups;
+	int wep2 = ent->client->pers.weap2_ups;
+	int wep3 = ent->client->pers.weap3_ups;
 
 	// send the layout
 	Com_sprintf(string, sizeof(string),
 		"xv 32 yv 8 picn help "			// background
 		"xv 202 yv 12 string2 \"$%d\" "		// money
 		"xv 0 yv 24 cstring2 \"%s%s\" "		// menu name
-		"xv 53 yv 54 string2 \"%s\" "		// upgrade 1
-		"xv 53 yv 62 string2 \"%s\" "		// upgrade 2
-		"xv 53 yv 70 string2 \"%s\" "		// upgrade 3
-		"xv 0 yv 110 cstring2 \"%s\" "		// weapon 1
-		"xv 0 yv 118 cstring2 \"%s\" "		// weapon 2
-		"xv 0 yv 126 cstring2 \"%s\" "		// weapon 3
+		"xv 53 yv 54 string2 \"Upgrade 1:+Damage -$5,000\" "		// upgrade 1
+		"xv 53 yv 62 string2 \"Upgrade 2:-Recoil -$20,000\" "		// upgrade 2
+		"xv 53 yv 70 string2 \"Upgrade 3:++Damage -$50,000\" "		// upgrade 3
+		"xv 0 yv 110 cstring2 \"Blaster has %d/3 upgrades.\" "		// weapon 1 upgrades
+		"xv 0 yv 118 cstring2 \"Shotgun has %d/3 upgrades.\" "		// weapon 2 upgrades
+		"xv 0 yv 126 cstring2 \"Machinegun has %d/3 upgrades.\" "		// weapon 3 upgrades
 		"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
 		"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
 		money,
 		menu, curr,
-		up1, up2, up3,
 		wep1, wep2, wep3,
 		level.killed_monsters,
 		waves,
@@ -493,6 +488,13 @@ void G_SetStats (edict_t *ent)
 	// wave
 	//
 	ent->client->ps.stats[STAT_WAVE] = ent->wave;
+
+	//
+	// upgrades
+	//
+	ent->client->ps.stats[STAT_WEAP_1_UPGRADES] = ent->weap1_ups;
+	ent->client->ps.stats[STAT_WEAP_2_UPGRADES] = ent->weap1_ups;
+	ent->client->ps.stats[STAT_WEAP_3_UPGRADES] = ent->weap1_ups;
 
 	//
 	// ammo

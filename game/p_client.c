@@ -622,6 +622,10 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.money			= 0;
 	client->pers.wave			= 1;
 
+	client->pers.weap1_ups		= 0;
+	client->pers.weap2_ups		= 0;
+	client->pers.weap3_ups		= 0;
+
 	client->pers.max_bullets	= 200;
 	client->pers.max_shells		= 100;
 	client->pers.max_rockets	= 50;
@@ -663,6 +667,9 @@ void SaveClientData (void)
 		game.clients[i].pers.health = ent->health;
 		game.clients[i].pers.max_health = ent->max_health;
 		game.clients[i].pers.money = ent->money;
+		game.clients[i].pers.weap1_ups = ent->weap1_ups;
+		game.clients[i].pers.weap2_ups = ent->weap2_ups;
+		game.clients[i].pers.weap3_ups = ent->weap3_ups;
 		game.clients[i].pers.wave = ent->wave;
 		game.clients[i].pers.savedFlags = (ent->flags & (FL_GODMODE|FL_NOTARGET|FL_POWER_ARMOR));
 		if (coop->value)
@@ -675,6 +682,9 @@ void FetchClientEntData (edict_t *ent)
 	ent->health = ent->client->pers.health;
 	ent->max_health = ent->client->pers.max_health;
 	ent->money = ent->client->pers.money;
+	ent->weap1_ups = ent->client->pers.weap1_ups;
+	ent->weap2_ups = ent->client->pers.weap2_ups;
+	ent->weap3_ups = ent->client->pers.weap3_ups;
 	ent->wave = ent->client->pers.wave;
 	ent->flags |= ent->client->pers.savedFlags;
 	if (coop->value)

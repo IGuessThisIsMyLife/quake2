@@ -842,6 +842,9 @@ typedef struct
 	int			savedFlags;
 	int			money;
 	int			wave;
+	int			weap1_ups;
+	int			weap2_ups;
+	int			weap3_ups;
 
 	int			selected_item;
 	int			inventory[MAX_ITEMS];
@@ -1058,6 +1061,9 @@ struct edict_s
 	int			gib_health;
 	int			money;
 	int			wave;
+	int			weap1_ups;
+	int			weap2_ups;
+	int			weap3_ups;
 	int			deadflag;
 	qboolean	show_hostile;
 
