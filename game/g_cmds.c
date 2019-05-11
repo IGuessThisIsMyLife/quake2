@@ -324,6 +324,54 @@ void Cmd_God_f (edict_t *ent)
 	gi.cprintf (ent, PRINT_HIGH, msg);
 }
 
+/*
+==================
+Cmd_Buy
+
+Allows you to buy a weapon
+
+==================
+*/
+void Cmd_Buy(edict_t *ent)
+{
+	if (Q_stricmp(gi.args(1), "shotgun") == 0)
+	{
+		if (ent->client->pers.money < 10000)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for the shotgun.\n");
+		}
+		else{
+			ent->client->pers.money -= 10000;
+			Cmd_Give_f(ent);
+			gi.cprintf(ent, PRINT_HIGH, "You bought the shotgun.\n");
+		}
+	}
+	else if (Q_stricmp(gi.args(1), "machinegun") == 0)
+	{
+		if (ent->client->pers.money < 15000)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for the machinegun.\n");
+		}
+		else{
+			ent->client->pers.money -= 15000;
+			Cmd_Give_f(ent);
+			gi.cprintf(ent, PRINT_HIGH, "You bought the machinegun.\n");
+		}
+	}
+}
+
+/*
+==================
+Cmd_Upgrade
+
+Allows you to upgrade a weapon
+
+==================
+*/
+void Cmd_Upgrade(edict_t *ent)
+{
+	gi.cprintf(ent, PRINT_HIGH, "You tried to upgrade something.\n");
+}
 
 /*
 ==================
@@ -987,6 +1035,10 @@ void ClientCommand (edict_t *ent)
 		Cmd_Wave_f (ent);
 	else if (Q_stricmp(cmd, "playerlist") == 0)
 		Cmd_PlayerList_f(ent);
+	else if (Q_stricmp(cmd, "buy") == 0)
+		Cmd_Buy(ent);
+	else if (Q_stricmp(cmd, "upgrade") == 0)
+		Cmd_Upgrade(ent);
 	else	// anything that doesn't match a command will be a chat
 		Cmd_Say_f (ent, false, true);
 }

@@ -845,16 +845,35 @@ void Weapon_Blaster_Fire(edict_t *ent)
 		damage = 15;
 	else
 		damage = 10;
+
+	if (ent->client->pers.weap1_ups == 1) {
+		damage *= 2;
+	}
+	else if (ent->client->pers.weap1_ups == 2){
+		damage *= 2;
+		VectorSet(tempvec, 0, 8, 0);
+		VectorAdd(tempvec, vec3_origin, tempvec);
+		Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
+
+		VectorSet(tempvec, 0, -8, 0);
+		VectorAdd(tempvec, vec3_origin, tempvec);
+		Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
+	}
+	else if (ent->client->pers.weap1_ups == 3){
+		damage *= 4;
+		VectorSet(tempvec, 0, 8, 0);
+		VectorAdd(tempvec, vec3_origin, tempvec);
+		Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
+
+		VectorSet(tempvec, 0, -8, 0);
+		VectorAdd(tempvec, vec3_origin, tempvec);
+		Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
+	}
+
 	Blaster_Fire(ent, vec3_origin, damage, false, EF_BLASTER);
 
 	// STEVE : add 2 new bolts below
-	VectorSet(tempvec, 0, 8, 0);
-	VectorAdd(tempvec, vec3_origin, tempvec);
-	Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
-
-	VectorSet(tempvec, 0, -8, 0);
-	VectorAdd(tempvec, vec3_origin, tempvec);
-	Blaster_Fire(ent, tempvec, damage, false, EF_BLASTER);
+	
 
 	ent->client->ps.gunframe++;
 }
@@ -1058,6 +1077,18 @@ void Machinegun_Fire(edict_t *ent)
 	{
 		damage *= 4;
 		kick *= 4;
+	}
+
+	if (ent->client->pers.weap3_ups == 1) {
+		damage *= 2;
+	}
+	else if (ent->client->pers.weap3_ups == 2){
+		damage *= 2;
+		kick /= 2;
+	}
+	else if (ent->client->pers.weap3_ups == 3){
+		damage *= 4;
+		kick /= 2;
 	}
 
 	for (i = 1; i<3; i++)
@@ -1277,6 +1308,18 @@ void weapon_shotgun_fire(edict_t *ent)
 	{
 		damage *= 4;
 		kick *= 4;
+	}
+
+	if (ent->client->pers.weap2_ups == 1) {
+		damage *= 2;
+	}
+	else if (ent->client->pers.weap2_ups == 2){
+		damage *= 2;
+		kick /= 2;
+	}
+	else if (ent->client->pers.weap2_ups == 3){
+		damage *= 4;
+		kick /= 2;
 	}
 
 	if (deathmatch->value)
