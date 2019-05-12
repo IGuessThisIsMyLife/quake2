@@ -125,7 +125,7 @@ void Killed (edict_t *targ, edict_t *inflictor, edict_t *attacker, int damage, v
 	}
 	targ->die (targ, inflictor, attacker, damage, point);
 	if (targ->svflags & SVF_MONSTER){
-		SetRespawn(targ, 7);
+		SetRespawn(targ, 10);
 		if (inflictor->classname == "weapon_machinegun"){
 			attacker->client->pers.inventory[attacker->client->ammo_index] += 5;
 		} else if (inflictor->classname != "weapon_blaster") {
