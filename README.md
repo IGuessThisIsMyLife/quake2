@@ -1,6 +1,8 @@
 # quake2
 Welcome to Quake $2!
 
+To install my mod you just need the mod folder which comes with its own shortcut to automatically launch my mod. Everything necessary is included in there.
+
 Controls are the same as usual game except 'F11' is used as the buy/informational window instead of the help menu.
 
 Killing enemies rewards you with $100 and refills a little ammo for the weapon you used so don't miss!
