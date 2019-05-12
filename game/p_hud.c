@@ -315,24 +315,49 @@ void HelpComputer (edict_t *ent)
 	int wep3 = ent->client->pers.weap3_ups;
 
 	// send the layout
-	Com_sprintf(string, sizeof(string),
-		"xv 32 yv 8 picn help "			// background
-		"xv 202 yv 12 string2 \"$%d\" "		// money
-		"xv 0 yv 24 cstring2 \"%s%s\" "		// menu name
-		"xv 53 yv 54 string2 \"Upgrade 1:+Damage -$5,000\" "		// upgrade 1
-		"xv 53 yv 62 string2 \"Upgrade 2:-Recoil -$20,000\" "		// upgrade 2
-		"xv 53 yv 70 string2 \"Upgrade 3:++Damage -$50,000\" "		// upgrade 3
-		"xv 0 yv 110 cstring2 \"Blaster has %d/3 upgrades.\" "		// weapon 1 upgrades
-		"xv 0 yv 118 cstring2 \"Shotgun has %d/3 upgrades.\" "		// weapon 2 upgrades
-		"xv 0 yv 126 cstring2 \"Machinegun has %d/3 upgrades.\" "	// weapon 3 upgrades
-		"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
-		"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
-		money,
-		menu, curr,
-		wep1, wep2, wep3,
-		level.killed_monsters,
-		waves,
-		killsNeeded);
+
+	if (Q_stricmp(curr, "Blaster") == 0)
+	{
+		Com_sprintf(string, sizeof(string),
+			"xv 32 yv 8 picn help "			// background
+			"xv 202 yv 12 string2 \"$%d\" "		// money
+			"xv 0 yv 24 cstring2 \"%s%s\" "		// menu name
+			"xv 53 yv 54 string2 \"Upgrade 1:+Damage -$5,000\" "		// upgrade 1
+			"xv 53 yv 62 string2 \"Upgrade 2:+Projecs -$15,000\" "		// upgrade 2
+			"xv 53 yv 70 string2 \"Upgrade 3:++Damage -$30,000\" "		// upgrade 3
+			"xv 0 yv 110 cstring2 \"Blaster has %d/3 upgrades.\" "		// weapon 1 upgrades
+			"xv 0 yv 118 cstring2 \"Shotgun has %d/3 upgrades.\" "		// weapon 2 upgrades
+			"xv 0 yv 126 cstring2 \"Machinegun has %d/3 upgrades.\" "	// weapon 3 upgrades
+			"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
+			"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
+			money,
+			menu, curr,
+			wep1, wep2, wep3,
+			level.killed_monsters,
+			waves,
+			killsNeeded);
+	}
+	else
+	{
+		Com_sprintf(string, sizeof(string),
+			"xv 32 yv 8 picn help "			// background
+			"xv 202 yv 12 string2 \"$%d\" "		// money
+			"xv 0 yv 24 cstring2 \"%s%s\" "		// menu name
+			"xv 53 yv 54 string2 \"Upgrade 1:+Damage -$5,000\" "		// upgrade 1
+			"xv 53 yv 62 string2 \"Upgrade 2:-Recoil -$15,000\" "		// upgrade 2
+			"xv 53 yv 70 string2 \"Upgrade 3:++Damage -$30,000\" "		// upgrade 3
+			"xv 0 yv 110 cstring2 \"Blaster has %d/3 upgrades.\" "		// weapon 1 upgrades
+			"xv 0 yv 118 cstring2 \"Shotgun has %d/3 upgrades.\" "		// weapon 2 upgrades
+			"xv 0 yv 126 cstring2 \"Machinegun has %d/3 upgrades.\" "	// weapon 3 upgrades
+			"xv 50 yv 164 string2 \" Kills      Wave    To->Wave\" "
+			"xv 50 yv 172 string2 \" %3i         %d        %d\" ",
+			money,
+			menu, curr,
+			wep1, wep2, wep3,
+			level.killed_monsters,
+			waves,
+			killsNeeded);
+	}
 
 	gi.WriteByte(svc_layout);
 	gi.WriteString(string);

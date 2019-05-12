@@ -336,7 +336,7 @@ void Cmd_Buy(edict_t *ent)
 {
 	if (Q_stricmp(gi.args(1), "shotgun") == 0)
 	{
-		if (ent->client->pers.money < 10000)
+		if (ent->client->pers.money >= 10000)
 		{
 			gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for the shotgun.\n");
 		}
@@ -348,7 +348,7 @@ void Cmd_Buy(edict_t *ent)
 	}
 	else if (Q_stricmp(gi.args(1), "machinegun") == 0)
 	{
-		if (ent->client->pers.money < 15000)
+		if (ent->client->pers.money >= 15000)
 		{
 			gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for the machinegun.\n");
 		}
@@ -370,7 +370,150 @@ Allows you to upgrade a weapon
 */
 void Cmd_Upgrade(edict_t *ent)
 {
-	gi.cprintf(ent, PRINT_HIGH, "You tried to upgrade something.\n");
+	if (Q_stricmp(gi.args(1), "blaster") == 0)
+	{
+		if (ent->client->pers.weap1_ups == 3)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "This weapon can't be upgraded further.\n");
+			return;
+		}
+		
+		if (ent->client->pers.weap1_ups == 0)
+		{
+			if (ent->client->pers.money >= 5000)
+			{
+				ent->client->pers.weap1_ups++;
+				ent->client->pers.money -= 5000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 1 for the blaster. You now do 2x damage!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap1_ups == 1)
+		{
+			if (ent->client->pers.money >= 15000)
+			{
+				ent->client->pers.weap1_ups++;
+				ent->client->pers.money -= 15000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 2 for the blaster. You now do 2x damage and have 3 projectiles!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap1_ups == 2)
+		{
+			if (ent->client->pers.money >= 30000)
+			{
+				ent->client->pers.weap1_ups++;
+				ent->client->pers.money -= 30000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 3 for the blaster. You now do 4x damage and have 3 projectiles!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+	}
+	else if (Q_stricmp(gi.args(1), "shotgun") == 0)
+	{
+		if (ent->client->pers.weap2_ups == 3)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "This weapon can't be upgraded further.\n");
+			return;
+		}
+
+		if (ent->client->pers.weap2_ups == 0)
+		{
+			if (ent->client->pers.money >= 5000)
+			{
+				ent->client->pers.weap2_ups++;
+				ent->client->pers.money -= 5000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 1 for the shotgun. You now do 2x damage!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap2_ups == 1)
+		{
+			if (ent->client->pers.money >= 15000)
+			{
+				ent->client->pers.weap2_ups++;
+				ent->client->pers.money -= 15000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 2 for the shotgun. You now do 2x damage and have less recoil!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap2_ups == 2)
+		{
+			if (ent->client->pers.money >= 30000)
+			{
+				ent->client->pers.weap2_ups++;
+				ent->client->pers.money -= 30000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 3 for the shotgun. You now do 4x damage and have less recoil!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+	}
+	else if (Q_stricmp(gi.args(1), "machinegun") == 0)
+	{
+		if (ent->client->pers.weap3_ups == 3)
+		{
+			gi.cprintf(ent, PRINT_HIGH, "This weapon can't be upgraded further.\n");
+			return;
+		}
+
+		if (ent->client->pers.weap3_ups == 0)
+		{
+			if (ent->client->pers.money >= 5000)
+			{
+				ent->client->pers.weap3_ups++;
+				ent->client->pers.money -= 5000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 1 for the machinegun. You now do 2x damage!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap3_ups == 1)
+		{
+			if (ent->client->pers.money >= 15000)
+			{
+				ent->client->pers.weap3_ups++;
+				ent->client->pers.money -= 15000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 2 for the machinegun. You now do 2x damage and have less recoil!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+		else if (ent->client->pers.weap3_ups == 2)
+		{
+			if (ent->client->pers.money >= 30000)
+			{
+				ent->client->pers.weap3_ups++;
+				ent->client->pers.money -= 30000;
+				gi.cprintf(ent, PRINT_HIGH, "You bought Upgrade 3 for the machinegun. You now do 4x damage and have less recoil!\n");
+			}
+			else
+			{
+				gi.cprintf(ent, PRINT_HIGH, "You don't have enough money for this upgrade.\n");
+			}
+		}
+	}
 }
 
 /*
